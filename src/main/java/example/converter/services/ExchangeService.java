@@ -8,14 +8,15 @@ import java.math.RoundingMode;
 
 @Service
 public class ExchangeService {
-    private final ValueService valueService;
     private final ExchangeRatesService exchangeRatesService;
 
-    public ExchangeService(ValueService valueService, ExchangeRatesService exchangeRatesService) {
-        this.valueService = valueService;
+    public ExchangeService(ExchangeRatesService exchangeRatesService) {
         this.exchangeRatesService = exchangeRatesService;
     }
 
+    /*
+       Method do exchange based on given data
+    */
     public BigDecimal makeExchange(String baseValCode, String targetValCode, Double amount) {
         ExchangeRates exchangeRate = exchangeRatesService.getRateOf(baseValCode, targetValCode);
         BigDecimal bigDecimal = new BigDecimal(exchangeRate.getRate() * amount);

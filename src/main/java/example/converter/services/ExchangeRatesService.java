@@ -18,20 +18,24 @@ public class ExchangeRatesService {
         this.valueRepository = valueRepository;
     }
 
+    // Shows all available rates
     public Collection<ExchangeRates> getAllRates() {
         return exchangeRepository.findAll();
     }
 
+    // Shows the rate of given values
     public ExchangeRates getRateOf(String baseValCode, String targetValCode) {
         int baseId = valueRepository.findValueByCode(baseValCode).getId();
         int targetId = valueRepository.findValueByCode(targetValCode).getId();
         return exchangeRepository.findExchangeRatesByBaseValueIdAndTargetValueId(baseId, targetId);
     }
 
+    // Adds new rate
     public ExchangeRates addRate(ExchangeRates exchangeRates) {
         return exchangeRepository.save(exchangeRates);
     }
 
+    // Changes any available rate
     public ExchangeRates changeRateOf(String baseValCode, String targetValCode, Double rate) {
         ExchangeRates exchangeRate = getRateOf(baseValCode, targetValCode);
         exchangeRate.setRate(rate);

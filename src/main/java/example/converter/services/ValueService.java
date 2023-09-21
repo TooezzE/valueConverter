@@ -15,14 +15,17 @@ public class ValueService {
         this.valueRepository = valueRepository;
     }
 
+    // Shows all available values
     public Collection<Value> getAllValues() {
         return valueRepository.findAll();
     }
 
+    // Shows value info by its code
     public Value getValue(String code) {
         return valueRepository.findValueByCode(code);
     }
 
+    // Adds new value
     public Value addValue(Value value) {
         return valueRepository.save(value);
     }
